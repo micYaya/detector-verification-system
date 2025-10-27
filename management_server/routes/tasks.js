@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+// const authenticateToken = require('../middlewares/auth'); // 引入token验证中间件
+
+// // 应用中间件
+// router.use(authenticateToken);
 
 // 获取任务信息（支持设备编号过滤）
 router.get('/api/tasks', async (req, res) => {

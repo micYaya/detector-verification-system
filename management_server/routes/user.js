@@ -6,6 +6,9 @@ const bcrypt = require('bcryptjs');
 
 const userRouter = express.Router();
 const usersFile = path.join(__dirname, '../db/users.json');
+// const authenticateToken = require('../middlewares/auth'); // 引入token验证中间件
+// // 应用中间件
+// userRouter.use(authenticateToken);
 
 // 读取用户数据
 function readUsers() {

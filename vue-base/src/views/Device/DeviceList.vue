@@ -75,7 +75,7 @@
         </el-table-column>
       </el-table>
       <!-- 分页组件 -->
-      <div class="pagination-wrapper">
+      <!-- <div class="pagination-wrapper">
         <el-pagination
           :current-page="currentPage"
           :page-sizes="[5, 10, 15]"
@@ -85,7 +85,14 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
-      </div>
+      </div> -->
+      <Pagination
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="total"
+        @update:current-page="handleCurrentChange"
+        @update:page-size="handleSizeChange"
+      />
     </div>
     <!-- 编辑设备对话框 -->
     <EditDevice
@@ -114,6 +121,7 @@ import { ref } from 'vue';
 import EditDevice from './EditDevice.vue';
 import ViewDevice from './ViewDevice.vue';
 import AddDevice from './AddDevice.vue';
+import Pagination from '@/components/Pagination.vue';
 import { ElMessageBox } from 'element-plus';
 import { getDeviceList, delete_device } from '@/api/request.js';
 import { format } from 'date-fns';
@@ -245,7 +253,7 @@ const deleteDevice = async (id) => {
     await delete_device(id);
     await fetchDevices();
   } catch (error) {
-    console.error('删除设备信息失败', error);
+    // console.error('删除设备信息失败', error);
   }
 };
 

@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+// const authenticateToken = require('../middlewares/auth'); // 引入token验证中间件
+
+// // 应用中间件
+// router.use(authenticateToken);
 
 // 获取所有检测项目信息
 router.get('/api/inspection_items', async (req, res) => {

@@ -4,10 +4,10 @@ import { jwtDecode } from 'jwt-decode';
 import { useLoginStore } from '@/store/index';
 
 const api = axios.create({
-  // baseURL: 'http://127.0.0.1:3000', // 后端服务器地址
-  baseURL: 'http://192.168.2.119:3000', // 局域网内的 IP 地址
+  baseURL: 'http://127.0.0.1:3000', // 后端服务器地址
+  // baseURL: 'http://192.168.2.119:3000', // 局域网内的 IP 地址
   timeout: 30000,
-  // withCredentials: true // 允许携带跨域请求的 Cookie
+  withCredentials: true // 允许携带跨域请求的 Cookie
 });
 
 let isRefreshing = false;
@@ -15,7 +15,7 @@ let refreshSubscribers = [];
 
 const refreshAccessToken = async (refreshToken, rememberMe) => {
   try {
-    console.log('开始请求更换accessToken');
+    // console.log('开始请求更换accessToken');
     const config = {
       headers: {
         Authorization: `Bearer ${refreshToken}`,
@@ -26,15 +26,15 @@ const refreshAccessToken = async (refreshToken, rememberMe) => {
       {},
       config,
     );
-    console.log('刷新请求已发送');
+    // console.log('刷新请求已发送');
     const newAccessToken = res.data.data.accessToken;
-    console.log('更换accessToken');
+    // console.log('更换accessToken');
     if (rememberMe) {
       localStorage.setItem('accessToken', newAccessToken);
-      console.log('已更新本地存储的accessToken');
+      // console.log('已更新本地存储的accessToken');
     } else {
       sessionStorage.setItem('accessToken', newAccessToken);
-      console.log('已更新会话的accessToken');
+      // console.log('已更新会话的accessToken');
     }
     return newAccessToken;
   } catch (error) {
@@ -55,17 +55,18 @@ api.interceptors.request.use(async (config) => {
   const rememberMe = localStorage.getItem('rememberMe') === 'true';
   const loginStore = useLoginStore();
   const userInfo = loginStore.getUserInfo;
-  console.log('请求拦截器的userInfo：', userInfo);
+  // console.log('请求拦截器的userInfo：', userInfo);
   // console.log('rememberMe: ', rememberMe);
   // console.log('accessToken: ', accessToken);
   // console.log('refreshToken: ', refreshToken);
   if (accessToken) {
     const decoded = jwtDecode(accessToken);
-    console.log('token 到期时间:', decoded.exp * 1000, '当前时间:', Date.now());
+    console.log({ decoded });
+    // console.log('token 到期时间:', decoded.exp * 1000, '当前时间:', Date.now());
     const now = Date.now() / 1000;
     // console.log(isRefreshing);
     if (decoded.exp < now && !isRefreshing) {
-      console.log('accessToken 已过期，尝试刷新');
+      // console.log('accessToken 已过期，尝试刷新');
       isRefreshing = true;
       const newAccessToken = await refreshAccessToken(refreshToken, rememberMe);
       if (newAccessToken) {

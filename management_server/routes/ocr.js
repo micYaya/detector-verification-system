@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { callDoubaoAPI } = require('../utils/process.js'); // 引入 OCR 处理函数
 const pool = require('../db/db'); // 引入数据库连接池
+// const authenticateToken = require('../middlewares/auth'); // 引入token验证中间件
+
+// // 应用中间件
+// router.use(authenticateToken);
 
 // OCR 处理接口
 router.post('/api/perform-ocr', async (req, res) => {

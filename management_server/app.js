@@ -32,6 +32,16 @@ app.use(session({
 // 配置压缩中间件,gzip压缩响应数据
 app.use(compression());
 
+const authenticateToken = require('./middlewares/auth'); // 引入 token 验证中间件
+// 跳过特定路由的 token 验证
+app.use((req, res, next) => {
+  const publicRoutes = ['/api/sendcode', '/api/login_sms', '/api/register', '/api/check_user', '/api/reset_password']; // 不需要验证的路由
+  if (publicRoutes.includes(req.path)) {
+    return next(); // 跳过验证
+  }
+  authenticateToken(req, res, next); // 其他路由需要验证
+});
+
 // 自动加载routes文件夹中的所有路由
 fs.readdirSync(path.join(__dirname, 'routes')).forEach((file) => {
   const route = require(`./routes/${file}`);

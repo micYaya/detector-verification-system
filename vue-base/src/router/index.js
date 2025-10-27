@@ -152,7 +152,6 @@ router.beforeEach(async (to, from, next) => {
       console.log(rememberMe);
       console.log('loginStore.isLoggedIn:', loginStore.isLoggedIn);
       if (!isTokenExpired(accessToken) && loginStore.isLoggedIn) {
-        // if (accessToken && loginStore.isLoggedIn) {
         // 有 accessToken没过期 且已登录，直接放行
         if (to.meta.requiresAdmin && userRole !== 'admin') {
           // 超级管理员页面，但用户不是超级管理员
@@ -165,7 +164,6 @@ router.beforeEach(async (to, from, next) => {
           return;
         }
         next();
-        // } else if (accessToken && !rememberMe && refreshToken) {
       } else if (isTokenExpired(accessToken) && !isTokenExpired(refreshToken)) {
         // 不管勾选“七天免登录”与否，refreshToken存在且未过期，尝试刷新 accessToken（无感刷新）
         try {

@@ -26,11 +26,9 @@ export const useLoginStore = defineStore('login', {
       };
       localStorage.removeItem('user');
       this.phoneNumber = null;
-      // localStorage.removeItem('token'); // 清除本地 token
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('rememberMe');
-      // sessionStorage.removeItem('token'); // 如果用了 session 也一起清除
       sessionStorage.removeItem('accessToken');
       sessionStorage.removeItem('refreshToken');
     },
