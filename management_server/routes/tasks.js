@@ -8,56 +8,56 @@ const pool = require('../db/db');
 
 // 获取任务信息（支持设备编号过滤）
 router.get('/api/tasks', async (req, res) => {
-  try {
-    const deviceId = req.query.deviceId;
-    let sql = 'SELECT * FROM tasks';
-    const params = [];
-    if (deviceId) {
-      sql += ' WHERE deviceId = ?';
-      params.push(deviceId);
+    try {
+        const deviceId = req.query.deviceId;
+        let sql = 'SELECT * FROM tasks';
+        const params = [];
+        if (deviceId) {
+            sql += ' WHERE deviceId = ?';
+            params.push(deviceId);
+        }
+        const [rows] = await pool.execute(sql, params);
+        res.json(rows);
+    } catch (error) {
+        console.error('获取任务信息失败', error);
+        res.status(500).json({ error: '获取任务信息失败' });
     }
-    const [rows] = await pool.execute(sql, params);
-    res.json(rows);
-  } catch (error) {
-    console.error('获取任务信息失败', error);
-    res.status(500).json({ error: '获取任务信息失败' });
-  }
 });
 
 // 创建任务接口
 router.post('/api/tasks', async (req, res) => {
-  try {
-    console.log(req.body);
-    const { deviceId, startTime, endTime, status } = req.body;
-    const [result] = await pool.execute(
-      'INSERT INTO tasks (deviceId, startTime, endTime, status) VALUES (?, ?, ?, ?)',
-      [deviceId, startTime || null, endTime || null, status]
-    );
-    const taskId = result.insertId;
-    console.log('taskId:', taskId);
-    res.json({ id: taskId, deviceId, startTime, endTime, status });
-  } catch (error) {
-    console.error('创建任务失败', error);
-    res.status(500).json({ error: '创建任务失败' });
-  }
+    try {
+        console.log(req.body);
+        const { deviceId, startTime, endTime, status } = req.body;
+        const [result] = await pool.execute(
+            'INSERT INTO tasks (deviceId, startTime, endTime, status) VALUES (?, ?, ?, ?)',
+            [deviceId, startTime || null, endTime || null, status]
+        );
+        const taskId = result.insertId;
+        console.log('taskId:', taskId);
+        res.json({ id: taskId, deviceId, startTime, endTime, status });
+    } catch (error) {
+        console.error('创建任务失败', error);
+        res.status(500).json({ error: '创建任务失败' });
+    }
 });
 
 // 更新任务接口
 router.put('/api/tasks/:id', async (req, res) => {
-  try {
-    const taskId = req.params.id;
-    console.log(req.body);
-    const { deviceId, startTime, endTime, status } = req.body;
-    
-    await pool.execute(
-      'UPDATE tasks SET deviceId = ?, startTime = ?, endTime = ?, status = ? WHERE id = ?',
-      [deviceId, startTime || null, endTime || null, status, taskId]
-    );
-    res.json({ message: '任务更新成功' });
-  } catch (error) {
-    console.error('更新任务失败', error);
-    res.status(500).json({ error: '更新任务失败' });
-  }
+    try {
+        const taskId = req.params.id;
+        console.log(req.body);
+        const { deviceId, startTime, endTime, status } = req.body;
+
+        await pool.execute(
+            'UPDATE tasks SET deviceId = ?, startTime = ?, endTime = ?, status = ? WHERE id = ?',
+            [deviceId, startTime || null, endTime || null, status, taskId]
+        );
+        res.json({ message: '任务更新成功' });
+    } catch (error) {
+        console.error('更新任务失败', error);
+        res.status(500).json({ error: '更新任务失败' });
+    }
 });
 
 // 删除任务信息
@@ -74,8 +74,8 @@ router.delete('/api/tasks/:id', async (req, res) => {
 
 // 获取任务里的实验项目数量
 router.get('/api/tasks/with-item-count', async (req, res) => {
-  try {
-    const [rows] = await pool.execute(`
+    try {
+        const [rows] = await pool.execute(`
       SELECT 
         tasks.id, 
         tasks.deviceId, 
@@ -87,11 +87,11 @@ router.get('/api/tasks/with-item-count', async (req, res) => {
       LEFT JOIN inspection_items ON tasks.id = inspection_items.task_id
       GROUP BY tasks.id, tasks.deviceId, tasks.startTime, tasks.endTime, tasks.status
     `);
-    res.json(rows);
-  } catch (error) {
-    console.error('获取任务及实验项目数量失败', error);
-    res.status(500).json({ error: '获取任务及实验项目数量失败' });
-  }
+        res.json(rows);
+    } catch (error) {
+        console.error('获取任务及实验项目数量失败', error);
+        res.status(500).json({ error: '获取任务及实验项目数量失败' });
+    }
 });
 
 module.exports = router;

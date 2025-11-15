@@ -1,17 +1,35 @@
 import ajax from './ajax';
-// 发送短信验证码
+import { encrypt } from '@/utils/crypto';
+const enableEncryption = import.meta.env.VITE_ENABLE_API_ENCRYPTION === 'true';
+
 const reqSendCode = (phone, type = 'normal') =>
-  ajax('/api/sendcode', { phone, type });
-// 登录请求
+    ajax('/api/sendcode', { phone, type });
+
 const reqSmsLogin = (phone, code) =>
-  ajax('/api/login_sms', { phone, code }, 'POST');
-// 密码重置请求
-const resetPassword = (phone, code, password) =>
-  ajax('api/reset_password', { phone, code, password }, 'POST');
-// 新用户注册请求
-const register = (phone, code, password) =>
-  ajax('api/register', { phone, code, password }, 'POST');
-// 检查系统用户是否存在
-const checkUser = (username, password = '') =>
-  ajax('/api/check_user', { username, password });
+    ajax('/api/login_sms', { phone, code }, 'POST');
+
+const resetPassword = (phone, code, password) => {
+    if (enableEncryption) {
+        const data = encrypt({ phone, code, password });
+        return ajax('api/reset_password', { encrypted: true, data }, 'POST');
+    }
+    return ajax('api/reset_password', { phone, code, password }, 'POST');
+};
+
+const register = (phone, code, password) => {
+    if (enableEncryption) {
+        const data = encrypt({ phone, code, password });
+        return ajax('api/register', { encrypted: true, data }, 'POST');
+    }
+    return ajax('api/register', { phone, code, password }, 'POST');
+};
+
+const checkUser = (username, password = '', remember = false) => {
+    if (enableEncryption) {
+        const data = encrypt({ username, password, remember });
+        return ajax('/api/check_user', { encrypted: true, data }, 'POST');
+    }
+    return ajax('/api/check_user', { username, password, remember }, 'POST');
+};
+
 export { reqSendCode, reqSmsLogin, resetPassword, register, checkUser };

@@ -14,13 +14,14 @@ const openai = new OpenAI({
 // 调用豆包大模型 API
 async function callDoubaoAPI() {
     try {
-        let index = Math.floor((Math.random() * 200) + 1);
-        console.log({index});
+        let index = Math.floor(Math.random() * 200 + 1);
+        console.log({ index });
         // 两张图片的 URL
         // const randomImageUrl = 'https://a43c-240e-45d-ce60-9575-d878-c1d5-25cd-aa4f.ngrok-free.app/';
         // const templateImageUrl = 'https://a43c-240e-45d-ce60-9575-d878-c1d5-25cd-aa4f.ngrok-free.app/template_image.jpg';
         const randomImageUrl = `https://images-yayamic.tos-cn-beijing.volces.com/images/${index}.jpg`;
-        const templateImageUrl = 'https://images-yayamic.tos-cn-beijing.volces.com/template_image.jpg';
+        const templateImageUrl =
+            'https://images-yayamic.tos-cn-beijing.volces.com/template_image.jpg';
         const data = {
             messages: [
                 {
@@ -61,22 +62,22 @@ async function callDoubaoAPI() {
                               res2: '1.792',
                               res3: '0.510',
                               res4: '0.510'
-                            }`
+                            }`,
                         },
                         {
                             type: 'image_url',
                             image_url: {
-                                url: templateImageUrl
-                            }
+                                url: templateImageUrl,
+                            },
                         },
                         {
                             type: 'image_url',
                             image_url: {
-                                url: randomImageUrl
-                            }
-                        }
-                    ]
-                }
+                                url: randomImageUrl,
+                            },
+                        },
+                    ],
+                },
             ],
             model: ENDPOINT_ID,
         };
@@ -86,7 +87,6 @@ async function callDoubaoAPI() {
         console.log('大模型回复内容:', responseContent);
         console.log(randomImageUrl);
         return responseContent;
-
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             console.error('无法连接到随机图片服务，请检查服务是否启动。');

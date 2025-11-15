@@ -12,7 +12,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 // app:vue的实例对象，一个项目中有且只有一个
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component);
+    app.component(key, component);
 }
 const pinia = createPinia();
 app.use(pinia);
@@ -22,6 +22,6 @@ const loginStore = useLoginStore();
 loginStore.initUserInfo();
 
 app.use(ElementPlus, {
-  locale: zhCn,
+    locale: zhCn,
 });
 app.mount('#app');

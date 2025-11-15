@@ -1,32 +1,39 @@
 {
-  "name": "management_server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.8.3",
-    "bcryptjs": "^3.0.2",
-    "blueimp-md5": "^2.19.0",
-    "body-parser": "^1.20.3",
-    "compression": "^1.8.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "js-base64": "^3.7.2",
-    "jsonwebtoken": "^9.0.2",
-    "moment": "^2.29.1",
-    "mysql2": "^3.13.0",
-    "openai": "^4.87.3",
-    "request": "^2.88.2",
-    "tencentcloud-sdk-nodejs": "^4.0.1051",
-    "xmldom": "^0.6.0"
-  }
+    "name": "management_server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js",
+        "format": "prettier --write .",
+        "prettier": "npm run format"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.8.3",
+        "bcryptjs": "^3.0.2",
+        "blueimp-md5": "^2.19.0",
+        "body-parser": "^1.20.3",
+        "compression": "^1.8.0",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "crypto-js": "^4.2.0",
+        "dotenv": "^16.5.0",
+        "express": "^4.21.2",
+        "express-session": "^1.18.1",
+        "js-base64": "^3.7.2",
+        "jsonwebtoken": "^9.0.2",
+        "moment": "^2.29.1",
+        "mysql2": "^3.13.0",
+        "openai": "^4.87.3",
+        "request": "^2.88.2",
+        "tencentcloud-sdk-nodejs": "^4.0.1051",
+        "xmldom": "^0.6.0"
+    },
+    "devDependencies": {
+        "prettier": "^3.5.3"
+    }
 }

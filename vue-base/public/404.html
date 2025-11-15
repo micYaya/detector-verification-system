@@ -1,18 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Page Not Found</title>
-  <!-- 将 404 页面重定向到项目根路径 -->
-  <script>
-    // 匹配 GitHub Pages 的实际路径
-    const basePath = '/private-projects/';
-    window.location.href = basePath === '/' 
-      ? './' 
-      : `/${basePath.replace(/\/$/, '')}/`; // 重定向到根页面
-  </script>
-</head>
-<body>
-  <p>Redirecting to the app...</p>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Page Not Found</title>
+        <!-- 将 404 页面重定向到项目根路径 -->
+        <script>
+            // 匹配 GitHub Pages 的实际路径
+            const basePath = '/private-projects/';
+            window.location.href =
+                basePath === '/' ? './' : `/${basePath.replace(/\/$/, '')}/`; // 重定向到根页面
+        </script>
+    </head>
+    <body>
+        <p>Redirecting to the app...</p>
+    </body>
 </html>

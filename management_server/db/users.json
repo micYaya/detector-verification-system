@@ -1,20 +1,20 @@
 [
-  {
-    "id": "1744038323159",
-    "phone": "18171635893",
-    "password": "$2b$10$wFq1lzfIwinSw6MeHKm7cOmBKWnz2DUsJ7o1xkDr9ebqPksJSqFw6",
-    "createTime": 1744038323159,
-    "lastLogin": 1746458838815,
-    "nickname": "admin5893",
-    "role": "admin"
-  },
-  {
-    "id": "1746468075596",
-    "phone": "19137648918",
-    "password": "$2b$10$IgqTTrmn7VkdfSjVCT063uoNKUsSI6RSM4v7l1/Hs4bdg7Vcc7zt6",
-    "createTime": 1746468075596,
-    "lastLogin": 1746468075596,
-    "nickname": "admin8918",
-    "role": "user"
-  }
+    {
+        "id": "1744038323159",
+        "phone": "18171635893",
+        "password": "$2b$10$wFq1lzfIwinSw6MeHKm7cOmBKWnz2DUsJ7o1xkDr9ebqPksJSqFw6",
+        "createTime": 1744038323159,
+        "lastLogin": 1746458838815,
+        "nickname": "admin5893",
+        "role": "admin"
+    },
+    {
+        "id": "1746468075596",
+        "phone": "19137648918",
+        "password": "$2b$10$IgqTTrmn7VkdfSjVCT063uoNKUsSI6RSM4v7l1/Hs4bdg7Vcc7zt6",
+        "createTime": 1746468075596,
+        "lastLogin": 1746468075596,
+        "nickname": "admin8918",
+        "role": "user"
+    }
 ]
